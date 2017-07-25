@@ -7,18 +7,21 @@ import (
 )
 
 type Order struct {
-	ID         int    `json:"id"`
-	UID        int    `json:"uid"`
-	OrderNum   string `json:"order_num"`
-	Status     int
-	Count      int
-	Memo       string
-	AddressID  int `json:"address_id"`
-	CouponID   int `json:"coupon_id"`
-	Amount     float64
-	Pay        float64
-	CreateTime time.Time `json:"create_time"`
-	ModifyTime time.Time `json:"modify_time"`
+	ID           int    `json:"id"`
+	UID          int    `json:"uid"`
+	OrderNum     string `json:"order_num"`
+	Status       int
+	Count        int
+	Memo         string
+	AddressID    int `json:"address_id"`
+	CouponID     int `json:"coupon_id"`
+	Amount       float64
+	Pay          float64
+	CreateTime   time.Time `json:"create_time"`
+	ModifyTime   time.Time `json:"modify_time"`
+	OrderDetails []OrderDetail
+	AddressInfo  Address
+	CouponInfo   Coupon
 }
 
 func AddOrder(order *Order) {
@@ -41,11 +44,11 @@ func GetOrderByID(ID int) Order {
 	return order
 }
 
-func GetOrderByUID(UID int) Order {
-	var order Order
+func GetOrderByUID(UID int) []Order {
+	var orders []Order
 	o := orm.NewOrm()
-	o.Raw("SELECT * FROM `order` WHERE uid = ?", UID).QueryRow(&order)
-	return order
+	o.Raw("SELECT * FROM `order` WHERE uid = ?", UID).QueryRows(&orders)
+	return orders
 }
 
 func GetOrderByOrderNum(orderNum string) Order {

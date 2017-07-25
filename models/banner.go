@@ -6,7 +6,7 @@ import (
 
 type Banner struct {
 	ID     int
-	Imgurl string
+	ImgURL string `json:"imgurl"`
 	URL    string `json:"url"`
 	Title  string
 }
