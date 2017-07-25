@@ -21,13 +21,13 @@ func AddAddress(a *Address) {
 		a.Name, a.Tel, a.UID, a.Address, a.IsDefault, a.IsSelected).Exec()
 }
 
-func DeleteAddress(isDel, ID int) {
+func DeleteAddress(ID int) {
 	o := orm.NewOrm()
-	o.Raw("UPDATE address SET is_delete = ? WHERE id = ?", isDel, ID)
+	o.Raw("UPDATE address SET is_delete = 1 WHERE id = ?", ID)
 }
 
-func GetAddressByUID(UID int) Address {
-	var address Address
+func GetAddressByUID(UID int) []Address {
+	var address []Address
 	o := orm.NewOrm()
 	o.Raw("SELECT * FROM address WHERE uid = ? AND is_delete = 0", UID).QueryRow(&address)
 	return address
@@ -45,7 +45,7 @@ func ModifyAddressByID(a *Address) {
 	o.Raw("UPDATE address SET name = ?, tel = ?, address = ?, is_default = ?, is_selected = ? WHERE id = ?").Exec()
 }
 
-func GetSelectedAddressByUID(UID string) Address {
+func GetSelectedAddressByUID(UID int) Address {
 	var address Address
 	o := orm.NewOrm()
 	o.Raw("SELECT * FROM address WHERE is_selected = 1 AND uid = ?", UID).QueryRow(&address)
