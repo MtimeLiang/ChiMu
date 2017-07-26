@@ -28,10 +28,10 @@ func DeleteAddress(ID int) {
 }
 
 func GetAddressByUID(UID int) []Address {
-	var address []Address
+	var addressList []Address
 	o := orm.NewOrm()
-	o.Raw("SELECT * FROM address WHERE uid = ? AND is_delete = 0", UID).QueryRow(&address)
-	return address
+	o.Raw("SELECT * FROM address WHERE uid = ? AND is_delete = 0", UID).QueryRows(&addressList)
+	return addressList
 }
 
 func GetAddressByID(ID int) Address {

@@ -14,18 +14,24 @@ type AddressModifyController struct {
 	basic.BasicController
 }
 
+type AddressController struct {
+	basic.BasicController
+}
+
+type AddressSelectedController struct {
+	basic.BasicController
+}
+
+type AddressDeleteController struct {
+	basic.BasicController
+}
+
 func (c *AddressAddController) Get() {
-	uid, err := c.GetInt("uid")
+	uid, _ := c.GetInt("uid")
 	name := c.GetString("name")
 	tel := c.GetString("tel")
 	address := c.GetString("address")
 	provinceCity := c.GetString("province_city")
-
-	if err != nil {
-		c.Data["json"] = basic.ResInfo{InfoMsg: "参数错误", Status: 0, Data: ""}
-		c.ServeJSON()
-	}
-	addressList := services.GetAddressByUID(uid)
 
 	addressModel := new(models.Address)
 	addressModel.UID = uid
@@ -34,6 +40,7 @@ func (c *AddressAddController) Get() {
 	addressModel.Address = address
 	addressModel.ProvinceCity = provinceCity
 
+	addressList := services.GetAddressByUID(uid)
 	if len(addressList) == 0 {
 		// 第一次添加就是默认地址，默认选中
 		addressModel.IsDefault = 1
@@ -81,5 +88,40 @@ func (c *AddressModifyController) Get() {
 	}
 	services.ModifyAddressByID(&addressModel)
 	c.Data["json"] = basic.ResInfo{InfoMsg: "修改成功", Status: 1, Data: addressModel}
+	c.ServeJSON()
+}
+
+func (c *AddressController) Get() {
+	uid, _ := c.GetInt("uid")
+	id, _ := c.GetInt("id")
+
+	if uid > 0 {
+		addressList := services.GetAddressByUID(uid)
+		c.Data["json"] = basic.ResInfo{InfoMsg: "获取成功", Status: 1, Data: addressList}
+		c.ServeJSON()
+	} else if id > 0 {
+		address := services.GetAddressByID(id)
+		c.Data["json"] = basic.ResInfo{InfoMsg: "获取成功", Status: 1, Data: address}
+		c.ServeJSON()
+	}
+	c.Data["json"] = basic.ResInfo{InfoMsg: "获取失败", Status: 0, Data: ""}
+	c.ServeJSON()
+}
+
+func (c *AddressSelectedController) Get() {
+	uid, _ := c.GetInt("uid")
+	if uid > 0 {
+		address := services.GetSelectedAddressByUID(uid)
+		c.Data["json"] = basic.ResInfo{InfoMsg: "获取成功", Status: 1, Data: address}
+		c.ServeJSON()
+	}
+	c.Data["json"] = basic.ResInfo{InfoMsg: "参数错误", Status: 0, Data: nil}
+	c.ServeJSON()
+}
+
+func (c *AddressDeleteController) Get() {
+	id, _ := c.GetInt("id")
+	services.DeleteAddress(id)
+	c.Data["json"] = basic.ResInfo{InfoMsg: "删除成功", Status: 1, Data: nil}
 	c.ServeJSON()
 }

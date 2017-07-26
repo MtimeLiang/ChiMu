@@ -8,7 +8,7 @@ type Banner struct {
 	ID     int    `orm:"column(id)"`
 	ImgURL string `json:"imgurl" orm:"column(imgurl)"`
 	URL    string `json:"url" orm:"column(url)"`
-	Title  string
+	Title  string `json:"title"`
 }
 
 func GetBannerList() []Banner {
