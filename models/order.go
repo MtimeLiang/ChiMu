@@ -7,14 +7,14 @@ import (
 )
 
 type Order struct {
-	ID           int    `json:"id"`
-	UID          int    `json:"uid"`
+	ID           int    `json:"id" orm:"column(id)"`
+	UID          int    `json:"uid" orm:"column(uid)"`
 	OrderNum     string `json:"order_num"`
 	Status       int
 	Count        int
 	Memo         string
-	AddressID    int `json:"address_id"`
-	CouponID     int `json:"coupon_id"`
+	AddressID    int `json:"address_id" orm:"column(address_id)"`
+	CouponID     int `json:"coupon_id" orm:"column(coupon_id)"`
 	Amount       float64
 	Pay          float64
 	CreateTime   time.Time `json:"create_time"`

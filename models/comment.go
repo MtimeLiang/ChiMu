@@ -5,9 +5,9 @@ import (
 )
 
 type Comment struct {
-	ID         int `json:"id"`
-	PID        int `json:"pid"`
-	UID        int `json:"uid"`
+	ID         int `json:"id" orm:"column(id)"`
+	PID        int `json:"pid" orm:"column(pid)"`
+	UID        int `json:"uid" orm:"column(uid)"`
 	Date       string
 	Title      string
 	UserName   string `json:"user_name"`

@@ -5,13 +5,13 @@ import (
 )
 
 type User struct {
-	ID     int `json:"id"`
+	ID     int `json:"id" orm:"column(id)"`
 	Avatar string
 	Name   string
 	IsVip  int
 	Point  int
 	Award  int
-	OpenID string `json:"openid"`
+	OpenID string `json:"openid" orm:"column(openid)"`
 	Admin  string
 }
 

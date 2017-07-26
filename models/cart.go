@@ -5,12 +5,12 @@ import (
 )
 
 type Cart struct {
-	ID         int `json:"id"`
-	UID        int `json:"uid"`
-	PID        int `json:"pid"`
+	ID         int `json:"id" orm:"column(id)"`
+	UID        int `json:"uid" orm:"column(uid)"`
+	PID        int `json:"pid" orm:"column(pid)"`
 	Count      int
 	Title      string
-	SubMessage string `json:"submessage"`
+	SubMessage string `json:"submessage" orm:"column(submessage)"`
 	Price      float64
 	Volume     int
 	Images     string

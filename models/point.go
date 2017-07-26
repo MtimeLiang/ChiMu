@@ -7,8 +7,8 @@ import (
 )
 
 type Point struct {
-	ID          int `json:"id"`
-	UID         int `json:"uid"`
+	ID          int `json:"id" orm:"column(id)"`
+	UID         int `json:"uid" orm:"column(uid)"`
 	Point       int
 	CreateTime  time.Time `json:"create_time"`
 	Type        int

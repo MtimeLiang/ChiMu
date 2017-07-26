@@ -5,9 +5,9 @@ import (
 )
 
 type Banner struct {
-	ID     int
-	ImgURL string `json:"imgurl"`
-	URL    string `json:"url"`
+	ID     int    `orm:"column(id)"`
+	ImgURL string `json:"imgurl" orm:"column(imgurl)"`
+	URL    string `json:"url" orm:"column(url)"`
 	Title  string
 }
 

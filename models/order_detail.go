@@ -5,9 +5,9 @@ import (
 )
 
 type OrderDetail struct {
-	ID          int `json:"id"`
-	OID         int `json:"oid"`
-	PID         int `json:"pid"`
+	ID          int `json:"id" orm:"column(id)"`
+	OID         int `json:"oid" orm:"column(oid)"`
+	PID         int `json:"pid" orm:"column(pid)"`
 	Count       int
 	Price       float64
 	ProductInfo Product

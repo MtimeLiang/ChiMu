@@ -5,14 +5,14 @@ import (
 )
 
 type Product struct {
-	ID               int `json:"id"`
+	ID               int `json:"id" orm:"column(id)"`
 	Title            string
-	SubMessage       string `json:"submessage"`
+	SubMessage       string `json:"submessage" orm:"column(submessage)"`
 	Price            float64
 	Volume           int
 	Image            string
 	Description      string
-	OriginPrice      float64 `json:"origprice"`
+	OriginPrice      float64 `json:"origprice" orm:"column(origprice)"`
 	Count            int
 	DescriptionImage string  `json:"description_image"`
 	FreightMoney     float64 `json:"freight_money"`

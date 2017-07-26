@@ -5,12 +5,12 @@ import (
 )
 
 type Image struct {
-	ID          int    `json:"id"`
-	URL         string `json:"url"`
-	ProductID   int    `json:"product_id"`
+	ID          int    `json:"id" orm:"column(id)"`
+	URL         string `json:"url" orm:"column(url)"`
+	ProductID   int    `json:"product_id" orm:"column(product_id)"`
 	ProductType int    `json:"product_type"`
-	BannerID    int    `json:"banner_id"`
-	CommentID   int    `json:"comment_id"`
+	BannerID    int    `json:"banner_id" orm:"column(banner_id)"`
+	CommentID   int    `json:"comment_id" orm:"column(comment_id)"`
 }
 
 func AddImage(img Image) {

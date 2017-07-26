@@ -5,11 +5,11 @@ import (
 )
 
 type Address struct {
-	ID           int
-	UID          int
-	Name         string
-	Tel          string
-	Address      string
+	ID           int    `json:"id" orm:"column(id)"`
+	UID          int    `json:"uid" orm:"column(uid)"`
+	Name         string `json:"name"`
+	Tel          string `json:"tel"`
+	Address      string `json:"address"`
 	ProvinceCity string `json:"province_city"`
 	IsDefault    int    `json:"is_default"`
 	IsSelected   int    `json:"is_selected"`
