@@ -1,11 +1,12 @@
 package services
 
 import "ChiMu/models"
+import "strconv"
 
 func GetCouponByPID(PID int) []models.Coupon {
 	coupons := models.GetCouponByPID(PID)
-	for c := range coupons {
-		c.Title = "满" + c.MaxPrice + "减" + c.Price
+	for _, c := range coupons {
+		c.Title = "满" + strconv.Itoa(c.MaxPrice) + "减" + strconv.Itoa(c.Price)
 	}
 	return coupons
 }

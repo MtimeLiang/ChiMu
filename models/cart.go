@@ -33,11 +33,11 @@ func ModifyCartByID(c *Cart) {
 	o.Raw("UPDATE cart SET count = ? WHERE id = ?", c.Count, c.ID).Exec()
 }
 
-func GetCartByUID(UID int) Cart {
-	var cart Cart
+func GetCartByUID(UID int) []Cart {
+	var carts []Cart
 	o := orm.NewOrm()
-	o.Raw("SELECT * FROM cart WHERE uid = ?", UID).QueryRow(&cart)
-	return cart
+	o.Raw("SELECT * FROM cart WHERE uid = ?", UID).QueryRows(&carts)
+	return carts
 }
 
 func DeleteCart(ID int) {

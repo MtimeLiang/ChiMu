@@ -27,12 +27,12 @@ func GetBannerByID(ID int) Banner {
 
 func AddBanner(b *Banner) {
 	o := orm.NewOrm()
-	o.Raw("INSERT INTO banner(title, url, imgurl) VALUES (?, ?, ?)", b.Title, b.URL, b.Imgurl).Exec()
+	o.Raw("INSERT INTO banner(title, url, imgurl) VALUES (?, ?, ?)", b.Title, b.URL, b.ImgURL).Exec()
 }
 
 func ModifyBanner(b *Banner) {
 	o := orm.NewOrm()
-	o.Raw("UPDATE banner SET title = ?, url = ?, imgurl = ? WHERE id = ?", b.Title, b.URL, b.Imgurl, b.ID).Exec()
+	o.Raw("UPDATE banner SET title = ?, url = ?, imgurl = ? WHERE id = ?", b.Title, b.URL, b.ImgURL, b.ID).Exec()
 }
 
 func DeleteBanner(ID int) {

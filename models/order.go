@@ -58,7 +58,7 @@ func GetOrderByOrderNum(orderNum string) Order {
 	return order
 }
 
-func ModifyOrder(order Order) {
+func ModifyOrder(order *Order) {
 	o := orm.NewOrm()
 	o.Raw("UPDATE `order` SET address_id = ?, coupon_id = ?, status = ?, memo = ?, pay = ?, modify_time = ? WHERE id = ?",
 		order.AddressID, order.CouponID, order.Status, order.Memo, order.Pay, order.ModifyTime, order.ID).Exec()

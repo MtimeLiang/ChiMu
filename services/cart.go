@@ -3,7 +3,7 @@ package services
 import "ChiMu/models"
 
 func AddCart(c *models.Cart) {
-	return models.AddCart(c)
+	models.AddCart(c)
 }
 
 func GetCart(PID, UID int) models.Cart {

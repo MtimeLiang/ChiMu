@@ -5,20 +5,21 @@ import (
 )
 
 type Address struct {
-	ID         int
-	UID        int
-	Name       string
-	Tel        string
-	Address    string
-	IsDefault  int `json:"is_default"`
-	IsSelected int `json:"is_selected"`
-	IsDelete   int `json:"is_delete"`
+	ID           int
+	UID          int
+	Name         string
+	Tel          string
+	Address      string
+	ProvinceCity string `json:"province_city"`
+	IsDefault    int    `json:"is_default"`
+	IsSelected   int    `json:"is_selected"`
+	IsDelete     int    `json:"is_delete"`
 }
 
 func AddAddress(a *Address) {
 	o := orm.NewOrm()
-	o.Raw("INSERT INTO address(name, tel, uid, address, is_default, is_selected) VALUES(?, ?, ?, ?, ?, ?)",
-		a.Name, a.Tel, a.UID, a.Address, a.IsDefault, a.IsSelected).Exec()
+	o.Raw("INSERT INTO address(name, tel, uid, address, province_city, is_default, is_selected) VALUES(?, ?, ?, ?, ?, ?)",
+		a.Name, a.Tel, a.UID, a.Address, a.ProvinceCity, a.IsDefault, a.IsSelected).Exec()
 }
 
 func DeleteAddress(ID int) {
@@ -42,7 +43,8 @@ func GetAddressByID(ID int) Address {
 
 func ModifyAddressByID(a *Address) {
 	o := orm.NewOrm()
-	o.Raw("UPDATE address SET name = ?, tel = ?, address = ?, is_default = ?, is_selected = ? WHERE id = ?").Exec()
+	o.Raw("UPDATE address SET name = ?, tel = ?, address = ?, province_city = ?, is_default = ?, is_selected = ? WHERE id = ?",
+		a.Name, a.Tel, a.Address, a.ProvinceCity, a.IsDefault, a.IsSelected, a.ID).Exec()
 }
 
 func GetSelectedAddressByUID(UID int) Address {

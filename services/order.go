@@ -11,28 +11,31 @@ func AddOrder(o *models.Order) {
 
 func GetOrderList() []models.Order {
 	orders := models.GetOrderList()
-	for o := range orders {
-		o = configOrderDetail(o)
+	for _, o := range orders {
+		configOrderDetail(&o)
 	}
 	return orders
 }
 
 func GetOrderByID(ID int) models.Order {
 	o := models.GetOrderByID(ID)
-	return configOrderDetail(o)
+	configOrderDetail(&o)
+	return o
 }
 
 func GetOrderByUID(UID int) []models.Order {
 	orders := models.GetOrderByUID(UID)
-	for o := range orders {
-		o = configOrderDetail(o)
+	for _, o := range orders {
+		configOrderDetail(&o)
 	}
 	return orders
 }
 
 func GetOrderByOrderNum(orderNum string) models.Order {
 	o := models.GetOrderByOrderNum(orderNum)
-	return configOrderDetail(o)
+	// return configOrderDetail(o)
+	configOrderDetail(&o)
+	return o
 }
 
 func ModifyOrder(o *models.Order) {
@@ -48,7 +51,7 @@ func ModifyOrder(o *models.Order) {
 	models.ModifyOrder(o)
 }
 
-func configOrderDetail(o *models.Order) models.Order {
+func configOrderDetail(o *models.Order) {
 	// 地址信息
 	if o.AddressID == 0 {
 		o.AddressInfo = GetSelectedAddressByUID(o.UID)
@@ -61,8 +64,7 @@ func configOrderDetail(o *models.Order) models.Order {
 	}
 	// 订单详情信息
 	o.OrderDetails = GetOrderDetailByOID(o.ID)
-	for detail := range o.OrderDetails {
-		detail.ProductInfo = models.GetProductWithID(o.PID)
+	for _, detail := range o.OrderDetails {
+		detail.ProductInfo = models.GetProductWithID(detail.PID)
 	}
-	return o
 }

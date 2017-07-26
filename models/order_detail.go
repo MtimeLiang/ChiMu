@@ -13,15 +13,15 @@ type OrderDetail struct {
 	ProductInfo Product
 }
 
-func AddOrderDetail(detail OrderDetail) {
+func AddOrderDetail(detail *OrderDetail) {
 	o := orm.NewOrm()
 	o.Raw("INSERT INTO orderdetail(oid, pid, count, price) VALUES(?, ?, ?, ?)",
 		detail.OID, detail.PID, detail.Count, detail.Price).Exec()
 }
 
-func GetOrderDetailByOID(OID int) OrderDetail {
-	var detail OrderDetail
+func GetOrderDetailByOID(OID int) []OrderDetail {
+	var details []OrderDetail
 	o := orm.NewOrm()
-	o.Raw("SELECT * FROM orderdetail WHERE oid = ?", OID).QueryRow(&detail)
-	return detail
+	o.Raw("SELECT * FROM orderdetail WHERE oid = ?", OID).QueryRows(&details)
+	return details
 }

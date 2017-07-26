@@ -1,5 +1,6 @@
 package services
 
+/*
 import (
 	"ChiMu/models"
 	"mime/multipart"
@@ -29,3 +30,4 @@ func getImageList(images []models.Image, fs []multipart.File, hs []multipart.Fil
 		}
 	}
 }
+*/
