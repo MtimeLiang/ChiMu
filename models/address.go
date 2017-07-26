@@ -18,7 +18,7 @@ type Address struct {
 
 func AddAddress(a *Address) {
 	o := orm.NewOrm()
-	o.Raw("INSERT INTO address(name, tel, uid, address, province_city, is_default, is_selected) VALUES(?, ?, ?, ?, ?, ?)",
+	o.Raw("INSERT INTO address(name, tel, uid, address, province_city, is_default, is_selected) VALUES(?, ?, ?, ?, ?, ?, ?)",
 		a.Name, a.Tel, a.UID, a.Address, a.ProvinceCity, a.IsDefault, a.IsSelected).Exec()
 }
 
