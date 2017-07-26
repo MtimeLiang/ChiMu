@@ -5,12 +5,12 @@ import (
 )
 
 type OrderDetail struct {
-	ID          int `json:"id" orm:"column(id)"`
-	OID         int `json:"oid" orm:"column(oid)"`
-	PID         int `json:"pid" orm:"column(pid)"`
-	Count       int
-	Price       float64
-	ProductInfo Product
+	ID          int     `json:"id" orm:"column(id)"`
+	OID         int     `json:"oid" orm:"column(oid)"`
+	PID         int     `json:"pid" orm:"column(pid)"`
+	Count       int     `json:"count"`
+	Price       float64 `json:"price"`
+	ProductInfo Product `json:"product_info"`
 }
 
 func AddOrderDetail(detail *OrderDetail) {

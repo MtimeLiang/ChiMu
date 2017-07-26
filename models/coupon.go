@@ -5,12 +5,12 @@ import (
 )
 
 type Coupon struct {
-	ID        int `json:"id" orm:"column(id)"`
-	PID       int `json:"pid" orm:"column(pid)"`
-	UID       int `json:"uid" orm:"column(uid)"`
-	Price     int
-	MaxPrice  int `json:"max_price"`
-	Title     string
+	ID        int    `json:"id" orm:"column(id)"`
+	PID       int    `json:"pid" orm:"column(pid)"`
+	UID       int    `json:"uid" orm:"column(uid)"`
+	Price     int    `json:"price"`
+	MaxPrice  int    `json:"max_price"`
+	Title     string `json:"title"`
 	BuildTime string `json:"build_time"`
 	EndTime   string `json:"end_time"`
 }

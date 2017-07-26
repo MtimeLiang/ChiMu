@@ -5,14 +5,14 @@ import (
 )
 
 type User struct {
-	ID     int `json:"id" orm:"column(id)"`
-	Avatar string
-	Name   string
-	IsVip  int
-	Point  int
-	Award  int
+	ID     int    `json:"id" orm:"column(id)"`
+	Avatar string `json:"avatar"`
+	Name   string `json:"name"`
+	IsVip  int    `json:"is_vip"`
+	Point  int    `json:"point"`
+	Award  int    `json:"award"`
 	OpenID string `json:"openid" orm:"column(openid)"`
-	Admin  string
+	Admin  string `json:"admin"`
 }
 
 func AddUser(u *User) {

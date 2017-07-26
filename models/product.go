@@ -5,22 +5,22 @@ import (
 )
 
 type Product struct {
-	ID               int `json:"id" orm:"column(id)"`
-	Title            string
-	SubMessage       string `json:"submessage" orm:"column(submessage)"`
-	Price            float64
-	Volume           int
-	Image            string
-	Description      string
-	OriginPrice      float64 `json:"origprice" orm:"column(origprice)"`
-	Count            int
-	DescriptionImage string  `json:"description_image"`
-	FreightMoney     float64 `json:"freight_money"`
-	Point            int
-	Sales            int
-	Images           []string
-	DescImages       []string
-	Invalid          int // 默认下架
+	ID               int      `json:"id" orm:"column(id)"`
+	Title            string   `json:"title"`
+	SubMessage       string   `json:"submessage" orm:"column(submessage)"`
+	Price            float64  `json:"price"`
+	Volume           int      `json:"colume"`
+	Image            string   `json:"image"`
+	Description      string   `json:"description"`
+	OriginPrice      float64  `json:"origprice" orm:"column(origprice)"`
+	Count            int      `json:"count"`
+	DescriptionImage string   `json:"description_image"`
+	FreightMoney     float64  `json:"freight_money"`
+	Point            int      `json:"point"`
+	Sales            int      `json:"sales"`
+	Images           []string `json:"images"`
+	DescImages       []string `json:"desc_images"`
+	Invalid          int      `json:"invalid"` // 默认下架
 }
 
 func AddProduct(p *Product) {

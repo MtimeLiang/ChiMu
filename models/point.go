@@ -7,12 +7,12 @@ import (
 )
 
 type Point struct {
-	ID          int `json:"id" orm:"column(id)"`
-	UID         int `json:"uid" orm:"column(uid)"`
-	Point       int
+	ID          int       `json:"id" orm:"column(id)"`
+	UID         int       `json:"uid" orm:"column(uid)"`
+	Point       int       `json:"point"`
 	CreateTime  time.Time `json:"create_time"`
-	Type        int
-	Description string
+	Type        int       `json:"type"`
+	Description string    `json:"description"`
 }
 
 func GetPointListByUID(UID int) []Point {

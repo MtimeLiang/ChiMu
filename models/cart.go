@@ -5,15 +5,15 @@ import (
 )
 
 type Cart struct {
-	ID         int `json:"id" orm:"column(id)"`
-	UID        int `json:"uid" orm:"column(uid)"`
-	PID        int `json:"pid" orm:"column(pid)"`
-	Count      int
-	Title      string
-	SubMessage string `json:"submessage" orm:"column(submessage)"`
-	Price      float64
-	Volume     int
-	Images     string
+	ID         int     `json:"id" orm:"column(id)"`
+	UID        int     `json:"uid" orm:"column(uid)"`
+	PID        int     `json:"pid" orm:"column(pid)"`
+	Count      int     `json:"count"`
+	Title      string  `json:"title"`
+	SubMessage string  `json:"submessage" orm:"column(submessage)"`
+	Price      float64 `json:"price"`
+	Volume     int     `json:"volume"`
+	Images     string  `json:"images"`
 }
 
 func AddCart(c *Cart) {

@@ -5,10 +5,10 @@ import (
 )
 
 type Promotion struct {
-	ID          int `json:"id" orm:"column(id)"`
-	PID         int `json:"pid" orm:"column(pid)"`
-	Name        string
-	Description string
+	ID          int    `json:"id" orm:"column(id)"`
+	PID         int    `json:"pid" orm:"column(pid)"`
+	Name        string `json:"name"`
+	Description string `json:"description"`
 }
 
 func GetPromotionList(PID int) []Promotion {
