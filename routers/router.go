@@ -9,6 +9,7 @@ import (
 func init() {
 	beego.Router("/", &controllers.MainController{})
 	registerAddressControllers()
+	registerBannerControllers()
 }
 
 func registerAddressControllers() {
@@ -17,4 +18,10 @@ func registerAddressControllers() {
 	beego.Router("/wine/address", &controllers.AddressController{})
 	beego.Router("/wine/address_selected", &controllers.AddressSelectedController{})
 	beego.Router("/wine/address_delete", &controllers.AddressDeleteController{})
+}
+
+func registerBannerControllers() {
+	beego.Router("/wine/banner", &controllers.BannerListController{})
+	beego.Router("/wine/banner_detail", &controllers.BannerDetailController{})
+	beego.Router("/wine/banner_add", &controllers.BannerAddController{})
 }

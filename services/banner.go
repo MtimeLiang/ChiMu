@@ -12,7 +12,7 @@ func AddBanner(b *models.Banner, f multipart.File, h multipart.FileHeader) {
 	if len(imgURL) > 0 {
 		b.ImgURL = imgURL
 	}
-	fmt.Println("imageURL = ", imgURL)
+	fmt.Println("--------------- imageURL = ", imgURL)
 	models.AddBanner(b)
 }
 

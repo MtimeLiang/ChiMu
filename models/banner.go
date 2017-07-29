@@ -5,7 +5,7 @@ import (
 )
 
 type Banner struct {
-	ID     int    `orm:"column(id)"`
+	ID     int    `orm:"column(id)" json:"id"`
 	ImgURL string `json:"imgurl" orm:"column(imgurl)"`
 	URL    string `json:"url" orm:"column(url)"`
 	Title  string `json:"title"`
@@ -14,14 +14,14 @@ type Banner struct {
 func GetBannerList() []Banner {
 	var banners []Banner
 	o := orm.NewOrm()
-	o.Raw("SELECT * FROM banner").QueryRows(banners)
+	o.Raw("SELECT * FROM banner").QueryRows(&banners)
 	return banners
 }
 
 func GetBannerByID(ID int) Banner {
 	var banner Banner
 	o := orm.NewOrm()
-	o.Raw("SELECT * FROM banner WHERE id = ?", ID).QueryRow(banner)
+	o.Raw("SELECT * FROM banner WHERE id = ?", ID).QueryRow(&banner)
 	return banner
 }
 

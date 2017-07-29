@@ -12,7 +12,7 @@ import (
 const (
 	// host  = "http://www.main-zha.com/chimu/wine/image?name="
 	// local = "C:/uploadImage/"
-	host  = "http://localhost:8080/image?name="
+	host  = "http://localhost:9090/image?name="
 	local = "/Users/leiliang/Desktop/wine_local_imgs/"
 )
 

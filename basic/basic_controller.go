@@ -20,6 +20,10 @@ type BasicController struct {
 	beego.Controller
 }
 
+func (c BasicController) Prepare() {
+	c.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
+}
+
 // New token
 // c := jwt.MapClaims{"username": "liang", "exp": time.Now().Add(time.Hour * 72).Unix(),}
 // token, err := c.NewToken(c)
