@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"ChiMu/basic"
+	"ChiMu/models"
 	"ChiMu/services"
 )
 
@@ -31,7 +32,18 @@ func (c *BannerDetailController) Get() {
 }
 
 func (c *BannerAddController) Post() {
-	c.SaveFile("file")
-	c.Data["json"] = basic.ResInfo{InfoMsg: "添加banner成功", Status: 1, Data: nil}
+	title := c.GetString("title")
+	url := c.GetString("url")
+
+	if imgURL, _ := c.SaveFile("file"); len(imgURL) > 0 {
+		banner := new(models.Banner)
+		banner.Title = title
+		banner.URL = url
+		banner.ImgURL = imgURL
+		services.AddBanner(banner)
+		c.Data["json"] = basic.ResInfo{InfoMsg: "添加banner成功", Status: 1, Data: nil}
+		c.ServeJSON()
+	}
+	c.Data["json"] = basic.ResInfo{InfoMsg: "添加banner失败", Status: 0, Data: nil}
 	c.ServeJSON()
 }

@@ -3,16 +3,10 @@ package services
 import (
 	"ChiMu/models"
 	"ChiMu/utils"
-	"fmt"
 	"mime/multipart"
 )
 
-func AddBanner(b *models.Banner, f multipart.File, h multipart.FileHeader) {
-	imgURL, _ := utils.SaveFile(f, h)
-	if len(imgURL) > 0 {
-		b.ImgURL = imgURL
-	}
-	fmt.Println("--------------- imageURL = ", imgURL)
+func AddBanner(b *models.Banner) {
 	models.AddBanner(b)
 }
 
