@@ -24,4 +24,5 @@ func registerBannerControllers() {
 	beego.Router("/wine/banner", &controllers.BannerListController{})
 	beego.Router("/wine/banner_detail", &controllers.BannerDetailController{})
 	beego.Router("/wine/banner_add", &controllers.BannerAddController{})
+	beego.Router("/wine/banner_modify", &controllers.BannerModifyController{})
 }
