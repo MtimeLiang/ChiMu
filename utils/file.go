@@ -47,12 +47,11 @@ func RemoveFile(path string) error {
 
 func Exists(path string) (bool, error) {
 	_, err := os.Stat(path)
-	if err != nil {
+	if err == nil {
 		return true, nil
 	}
-	// 检测是否为路径不存在的错误
 	if os.IsNotExist(err) {
 		return false, nil
 	}
-	return true, err
+	return false, err
 }
