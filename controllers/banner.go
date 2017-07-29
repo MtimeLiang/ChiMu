@@ -22,6 +22,10 @@ type BannerModifyController struct {
 	basic.BasicController
 }
 
+type BannerDeleteController struct {
+	basic.BasicController
+}
+
 func (c *BannerListController) Get() {
 	banners := services.GetBannerList()
 	c.Data["json"] = basic.ResInfo{InfoMsg: "获取banner成功", Status: 1, Data: banners}
@@ -68,5 +72,12 @@ func (c *BannerModifyController) Post() {
 		c.ServeJSON()
 	}
 	c.Data["json"] = basic.ResInfo{InfoMsg: "修改banner失败", Status: 0, Data: nil}
+	c.ServeJSON()
+}
+
+func (c *BannerDeleteController) Get() {
+	id, _ := c.GetInt("id")
+	services.DeleteBanner(id)
+	c.Data["json"] = basic.ResInfo{InfoMsg: "删除banner成功", Status: 1, Data: nil}
 	c.ServeJSON()
 }
