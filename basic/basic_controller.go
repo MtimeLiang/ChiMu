@@ -25,12 +25,12 @@ type BasicController struct {
 	beego.Controller
 }
 
-func (c BasicController) Prepare() {
+func (c *BasicController) Prepare() {
 	c.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
 }
 
 // SaveFile SaveFile("file")
-func (c BasicController) SaveFile(fileKey string) (imgURL string, err error) {
+func (c *BasicController) SaveFile(fileKey string) (imgURL string, err error) {
 	f, h, _ := c.GetFile(fileKey)
 	time := time.Now()
 	dir := "./static/img/upload/" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/")

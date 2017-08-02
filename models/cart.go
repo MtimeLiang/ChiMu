@@ -13,7 +13,15 @@ type Cart struct {
 	SubMessage string  `json:"submessage" orm:"column(submessage)"`
 	Price      float64 `json:"price"`
 	Volume     int     `json:"volume"`
-	Images     string  `json:"images"`
+	Image      string  `json:"image"`
+}
+
+func (c *Cart) SetProductModel(p Product) {
+	c.Title = p.Title
+	c.SubMessage = p.SubMessage
+	c.Price = p.Price
+	c.Volume = p.Volume
+	c.Image = p.Image
 }
 
 func AddCart(c *Cart) {

@@ -11,6 +11,7 @@ func init() {
 	registerAddressControllers()
 	registerBannerControllers()
 	registerCartControllers()
+	registerCommentControllers()
 }
 
 func registerAddressControllers() {
@@ -31,4 +32,10 @@ func registerBannerControllers() {
 
 func registerCartControllers() {
 	beego.Router("/wine/cart_add", &controllers.CartAddController{})
+	beego.Router("/wine/cart", &controllers.CartController{})
+	beego.Router("/wine/cart_delete", &controllers.CartDeleteController{})
+}
+
+func registerCommentControllers() {
+	beego.Router("/wine/comment", &controllers.CommentController{})
 }
