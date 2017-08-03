@@ -3,6 +3,7 @@ package basic
 import (
 	"ChiMu/utils"
 	"fmt"
+	"io"
 	"os"
 	"time"
 
@@ -47,6 +48,42 @@ func (c *BasicController) SaveFile(fileKey string) (imgURL string, err error) {
 	// imgURL = "http://www.main-zha.com/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + h.Filename
 	imgURL = "http://localhost:9090/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + h.Filename
 	return imgURL, nil
+}
+
+func (c *BasicController) SaveFiles(filesKey string) (imgURLs []string, err error) {
+	files, err := c.GetFiles(filesKey)
+	if err != nil {
+		return nil, err
+	}
+	imgURLs = make([]string, len(files))
+	for i, _ := range files {
+		// for each fileheader, get a handle to the actual file
+		file, err := files[i].Open()
+		defer file.Close()
+		if err != nil {
+			return nil, err
+		}
+		time := time.Now()
+		dir := "./static/img/upload/" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/")
+		exist, _ := utils.Exists(dir)
+		if !exist {
+			os.MkdirAll(dir, 0777)
+		}
+		path := dir + files[i].Filename
+		dst, err := os.Create(path)
+		defer dst.Close()
+		if err != nil {
+			return nil, err
+		}
+		// copy the uploaded file to the destination file
+		if _, err := io.Copy(dst, file); err != nil {
+			return nil, err
+		}
+		// imgURL = "http://www.main-zha.com/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + files[i].Filename
+		imgURL := "http://localhost:9090/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + files[i].Filename
+		imgURLs[i] = imgURL
+	}
+	return imgURLs, nil
 }
 
 // New token

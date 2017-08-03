@@ -22,3 +22,8 @@ func GetCommentByPID(PID int) []Comment {
 	o.Raw("SELECT * FROM comment WHERE pid = ?", PID).QueryRow(&comments)
 	return comments
 }
+
+func AddComment(c *Comment) {
+	o := orm.NewOrm()
+	o.Raw("INSERT INTO comment(pid, title, uid, create_time) VALUES (?, ?, ?, ?)", c.PID, c.Title, c.UID, c.CreateTime).Exec()
+}
