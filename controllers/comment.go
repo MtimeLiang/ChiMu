@@ -38,8 +38,6 @@ func (c *CommentAddController) Post() {
 	comment.PID = pid
 	comment.CreateTime = time.Now()
 
-	services.AddComment(comment)
-
 	if imgURLs, err := c.SaveFiles("file"); err == nil {
 		for _, imgURL := range imgURLs {
 			image := new(models.Image)
@@ -50,6 +48,8 @@ func (c *CommentAddController) Post() {
 			image.CommentID = comment.ID
 			models.AddImage(*image)
 		}
+
+		services.AddComment(comment)
 		c.Data["json"] = basic.ResInfo{InfoMsg: "评论成功", Status: 1, Data: nil}
 		c.ServeJSON()
 	}
