@@ -2,26 +2,24 @@ package controllers
 
 import (
 	"ChiMu/basic"
-	"ChiMu/models"
 	"ChiMu/services"
-	"time"
 )
 
 type CouponController struct {
 	basic.BasicController
 }
 
-type CouponAddController struct {
-	basic.BasicController
-}
+// type CouponAddController struct {
+// 	basic.BasicController
+// }
 
-type CouponModifyController struct {
-	basic.BasicController
-}
+// type CouponModifyController struct {
+// 	basic.BasicController
+// }
 
-type CouponDeleteController struct {
-	basic.BasicController
-}
+// type CouponDeleteController struct {
+// 	basic.BasicController
+// }
 
 func (c *CouponController) Get() {
 	id, idErr := c.GetInt("id")
@@ -41,53 +39,53 @@ func (c *CouponController) Get() {
 	c.ServeJSON()
 }
 
-func (c *CouponAddController) Get() {
-	coupon := getCouponWithData(&c.BasicController, true)
-	services.AddCoupon(&coupon)
-	c.Data["json"] = basic.ResInfo{InfoMsg: "添加优惠券成功", Status: 1, Data: nil}
-	c.ServeJSON()
-}
+// func (c *CouponAddController) Get() {
+// 	coupon := getCouponWithData(&c.BasicController, true)
+// 	services.AddCoupon(&coupon)
+// 	c.Data["json"] = basic.ResInfo{InfoMsg: "添加优惠券成功", Status: 1, Data: nil}
+// 	c.ServeJSON()
+// }
 
-func (c *CouponModifyController) Get() {
-	coupon := getCouponWithData(&c.BasicController, false)
-	services.ModifyCouponByID(&coupon)
-	c.Data["json"] = basic.ResInfo{InfoMsg: "修改优惠券成功", Status: 1, Data: nil}
-	c.ServeJSON()
-}
+// func (c *CouponModifyController) Get() {
+// 	coupon := getCouponWithData(&c.BasicController, false)
+// 	services.ModifyCouponByID(&coupon)
+// 	c.Data["json"] = basic.ResInfo{InfoMsg: "修改优惠券成功", Status: 1, Data: nil}
+// 	c.ServeJSON()
+// }
 
-func (c *CouponDeleteController) Get() {
-	id, _ := c.GetInt("id")
-	services.DeleteCouponByID(id)
-	c.Data["json"] = basic.ResInfo{InfoMsg: "删除优惠券成功", Status: 1, Data: nil}
-	c.ServeJSON()
-}
+// func (c *CouponDeleteController) Get() {
+// 	id, _ := c.GetInt("id")
+// 	services.DeleteCouponByID(id)
+// 	c.Data["json"] = basic.ResInfo{InfoMsg: "删除优惠券成功", Status: 1, Data: nil}
+// 	c.ServeJSON()
+// }
 
-// Private Method
-func getCouponWithData(c *basic.BasicController, isAdd bool) models.Coupon {
-	price, priceErr := c.GetInt("price")
-	maxPrice, maxPriceErr := c.GetInt("max_price")
-	pid, pidErr := c.GetInt("pid")
-	id, _ := c.GetInt("id")
-	day, _ := c.GetInt64("day")
+// // Private Method
+// func getCouponWithData(c *basic.BasicController, isAdd bool) models.Coupon {
+// 	price, priceErr := c.GetInt("price")
+// 	maxPrice, maxPriceErr := c.GetInt("max_price")
+// 	pid, pidErr := c.GetInt("pid")
+// 	id, _ := c.GetInt("id")
+// 	day, _ := c.GetInt64("day")
 
-	var coupon models.Coupon
-	if isAdd {
-		coupon = *new(models.Coupon)
-		coupon.IsDelete = 0
-		t := time.Now()
-		coupon.BuildTime = t.Format("2016-09-01")
-		d, _ := time.ParseDuration("+24h")
-		coupon.EndTime = t.Add(d * time.Duration(day)).Format("2016-09-01")
-	} else {
-		coupon = services.GetCouponByID(id)
-	}
+// 	var coupon models.Coupon
+// 	if isAdd {
+// 		coupon = *new(models.Coupon)
+// 		coupon.IsDelete = 0
+// 		t := time.Now()
+// 		coupon.BuildTime = t.Format("2016-09-01")
+// 		d, _ := time.ParseDuration("+24h")
+// 		coupon.EndTime = t.Add(d * time.Duration(day)).Format("2016-09-01")
+// 	} else {
+// 		coupon = services.GetCouponByID(id)
+// 	}
 
-	if priceErr == nil {
-		coupon.Price = price
-	} else if maxPriceErr == nil {
-		coupon.MaxPrice = maxPrice
-	} else if pidErr == nil {
-		coupon.PID = pid
-	}
-	return coupon
-}
+// 	if priceErr == nil {
+// 		coupon.Price = price
+// 	} else if maxPriceErr == nil {
+// 		coupon.MaxPrice = maxPrice
+// 	} else if pidErr == nil {
+// 		coupon.PID = pid
+// 	}
+// 	return coupon
+// }

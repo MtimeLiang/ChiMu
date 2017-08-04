@@ -15,6 +15,13 @@ type Coupon struct {
 	EndTime   string `json:"end_time"`
 }
 
+func GetCouponList() []Coupon {
+	var coupons []Coupon
+	o := orm.NewOrm()
+	o.Raw("SELECT * FROM coupon").QueryRows(&coupons)
+	return coupons
+}
+
 func GetCouponByID(ID int) Coupon {
 	var coupon Coupon
 	o := orm.NewOrm()
@@ -33,6 +40,13 @@ func GetCouponByUID(UID int) []Coupon {
 	var coupons []Coupon
 	o := orm.NewOrm()
 	o.Raw("SELECT * FROM coupon WHERE uid = ?", UID).QueryRows(&coupons)
+	return coupons
+}
+
+func GetCouponByPIDAndUID(PID, UID int) []Coupon {
+	var coupons []Coupon
+	o := orm.NewOrm()
+	o.Raw("SELECT * FROM coupon WHERE pid = ? AND uid = ?", PID, UID).QueryRows(&coupons)
 	return coupons
 }
 
