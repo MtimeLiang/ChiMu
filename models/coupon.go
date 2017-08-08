@@ -17,6 +17,13 @@ type Coupon struct {
 	Status    int    `json:"status"`
 }
 
+func GetCouponList() []Coupon {
+	var coupons []Coupon
+	o := orm.NewOrm()
+	o.Raw("SELECT * FROM coupon").QueryRows(&coupons)
+	return coupons
+}
+
 func GetCouponByID(ID int) Coupon {
 	var coupon Coupon
 	o := orm.NewOrm()
@@ -38,6 +45,13 @@ func GetCouponByUID(UID int) []Coupon {
 	return coupons
 }
 
+func GetCouponByPIDAndUID(PID, UID int) []Coupon {
+	var coupons []Coupon
+	o := orm.NewOrm()
+	o.Raw("SELECT * FROM coupon WHERE pid = ? AND uid = ?", PID, UID).QueryRows(&coupons)
+	return coupons
+}
+
 func NumberOfCouponByUID(UID int) int {
 	count := 0
 	o := orm.NewOrm()
@@ -56,11 +70,4 @@ func ModifyCouponByID(c *Coupon) {
 	o := orm.NewOrm()
 	o.Raw("UPDATE coupon SET price = ?, pid = ?, build_time = ?, end_time = ?, max_price = ? WHERE id = ?",
 		c.Price, c.PID, c.BuildTime, c.EndTime, c.MaxPrice, c.ID).Exec()
-}
-
-func GetCouponList() []Coupon {
-	var coupons []Coupon
-	o := orm.NewOrm()
-	o.Raw("SELECT * FROM coupon").QueryRows(&coupons)
-	return coupons
 }

@@ -6,6 +6,18 @@ import (
 	"strconv"
 )
 
+func GetCouponList() []models.Coupon {
+	coupons := models.GetCouponList()
+	for _, c := range coupons {
+		c.Title = "满" + strconv.Itoa(c.MaxPrice) + "减" + strconv.Itoa(c.Price)
+	}
+	return coupons
+}
+
+func GetCouponByID(ID int) models.Coupon {
+	return models.GetCouponByID(ID)
+}
+
 func GetCouponByPID(PID int) []models.Coupon {
 	coupons := models.GetCouponByPID(PID)
 	for _, c := range coupons {
@@ -24,10 +36,6 @@ func AddCoupon(c *models.Coupon) {
 
 func ModifyCouponByID(c *models.Coupon) {
 	models.ModifyCouponByID(c)
-}
-
-func GetCouponByID(ID int) models.Coupon {
-	return models.GetCouponByID(ID)
 }
 
 func DeleteCouponByID(ID int) {
@@ -49,8 +57,4 @@ func GetCouponByPIDAndUID(pid, uid int) []models.Coupon {
 		}
 	}
 	return coupons
-}
-
-func GetCouponList() []models.Coupon {
-	return models.GetCouponList()
 }
