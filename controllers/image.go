@@ -9,5 +9,7 @@ type ImageController struct {
 }
 
 func (c *ImageController) Get() {
-
+	imgName := c.GetString("name")
+	path := c.FileDir() + imgName
+	c.Ctx.Output.Download(path)
 }

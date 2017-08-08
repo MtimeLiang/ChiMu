@@ -30,11 +30,15 @@ func (c *BasicController) Prepare() {
 	c.Ctx.ResponseWriter.Header().Add("Access-Control-Allow-Origin", "*")
 }
 
+func (c *BasicController) FileDir() string {
+	return "./static/img/upload/"
+}
+
 // SaveFile SaveFile("file")
 func (c *BasicController) SaveFile(fileKey string) (imgURL string, err error) {
 	f, h, _ := c.GetFile(fileKey)
 	time := time.Now()
-	dir := "./static/img/upload/" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/")
+	dir := c.FileDir() + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/")
 	exist, _ := utils.Exists(dir)
 	if !exist {
 		os.MkdirAll(dir, 0777)
@@ -45,8 +49,8 @@ func (c *BasicController) SaveFile(fileKey string) (imgURL string, err error) {
 	if err := c.SaveToFile(fileKey, path); err != nil {
 		return "", err
 	}
-	// imgURL = "http://www.main-zha.com/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + h.Filename
-	imgURL = "http://localhost:9090/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + h.Filename
+	// imgURL = "http://www.main-zha.com/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + h.Filename
+	imgURL = "http://localhost:9090/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + h.Filename
 	return imgURL, nil
 }
 
@@ -64,7 +68,7 @@ func (c *BasicController) SaveFiles(filesKey string) (imgURLs []string, err erro
 			return nil, err
 		}
 		time := time.Now()
-		dir := "./static/img/upload/" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/")
+		dir := c.FileDir() + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/")
 		exist, _ := utils.Exists(dir)
 		if !exist {
 			os.MkdirAll(dir, 0777)
@@ -79,8 +83,8 @@ func (c *BasicController) SaveFiles(filesKey string) (imgURLs []string, err erro
 		if _, err := io.Copy(dst, file); err != nil {
 			return nil, err
 		}
-		// imgURL = "http://www.main-zha.com/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + files[i].Filename
-		imgURL := "http://localhost:9090/chimu/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + files[i].Filename
+		// imgURL = "http://www.main-zha.com/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + files[i].Filename
+		imgURL := "http://localhost:9090/wine/image?name=" + fmt.Sprint(time.Year(), "/", time.Month(), "/", time.Day(), "/") + files[i].Filename
 		imgURLs[i] = imgURL
 	}
 	return imgURLs, nil
