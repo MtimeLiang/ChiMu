@@ -13,3 +13,7 @@ func GetCommentUserByID(ID int) models.User {
 func NumberOfCouponByUID(UID int) int {
 	return models.NumberOfCouponByUID(UID)
 }
+
+func GetUserByID(ID int) models.User {
+	return models.GetUserByID(ID)
+}

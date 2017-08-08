@@ -14,6 +14,7 @@ func init() {
 	registerCommentControllers()
 	registerCouponControllers()
 	registerImageControllers()
+	registerMyCenterControllers()
 }
 
 func registerAddressControllers() {
@@ -52,4 +53,8 @@ func registerCouponControllers() {
 
 func registerImageControllers() {
 	beego.Router("/wine/image", &controllers.ImageController{})
+}
+
+func registerMyCenterControllers() {
+	beego.Router("/wine/my", &controllers.MyUserInfoController{})
 }

@@ -63,3 +63,10 @@ func ModifyOrder(order *Order) {
 	o.Raw("UPDATE `order` SET address_id = ?, coupon_id = ?, status = ?, memo = ?, pay = ?, modify_time = ? WHERE id = ?",
 		order.AddressID, order.CouponID, order.Status, order.Memo, order.Pay, order.ModifyTime, order.ID).Exec()
 }
+
+func GetOrderByUIDAndStatus(UID, status int) []Order {
+	o := orm.NewOrm()
+	var orders []Order
+	o.Raw("SELECT * FROM `order` WHERE uid = ? AND status = ? ORDER BY create_time DESC", UID, status).QueryRows(&orders)
+	return orders
+}

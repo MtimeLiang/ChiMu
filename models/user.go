@@ -47,3 +47,10 @@ func GetCommentUserByID(ID int) User {
 	o.Raw("SELECT name, avatar FROM user WHERE id = ?", ID).QueryRow(&user)
 	return user
 }
+
+func GetUserByID(ID int) User {
+	var user User
+	o := orm.NewOrm()
+	o.Raw("SELECT * FROM user WHERE id = ?", ID).QueryRow(&user)
+	return user
+}

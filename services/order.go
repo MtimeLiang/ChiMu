@@ -51,6 +51,10 @@ func ModifyOrder(o *models.Order) {
 	models.ModifyOrder(o)
 }
 
+func GetOrderByUIDAndStatus(UID, status int) []models.Order {
+	return models.GetOrderByUIDAndStatus(UID, status)
+}
+
 func configOrderDetail(o *models.Order) {
 	// 地址信息
 	if o.AddressID == 0 {
