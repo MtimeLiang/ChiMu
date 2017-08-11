@@ -64,3 +64,7 @@ func registerMyCouponControllers() {
 	beego.Router("/wine/my_coupon_add", &controllers.MyCouponAddController{})
 	beego.Router("/wine/my_coupon", &controllers.MyCouponController{})
 }
+
+func registerPointControllers() {
+	beego.Router("/wine/point", &controllers.PointController{})
+}
