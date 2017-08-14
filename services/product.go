@@ -9,3 +9,11 @@ func GetProductWithID(ID int) models.Product {
 	product.DescImages = models.GetImagesByPID(product.ID, 1)
 	return product
 }
+
+func GetProductList() []models.Product {
+	return models.GetProductList()
+}
+
+func AddProduct(p *models.Product) {
+	models.AddProduct(p)
+}
