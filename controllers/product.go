@@ -159,10 +159,11 @@ func (c *ProductController) ModifyProduct() {
 		}
 		product.Image = images[0].URL
 		product.DescriptionImage = desImages[0].URL
-		// services.AddProduct(product)
-		// c.Data["json"] = basic.ResInfo{InfoMsg: "添加成功", Status: 1, Data: nil}
-		// c.ServeJSON()
+		// FIX ME: - 这里没有删除原有图片...
+		services.ModifyProduct(&product)
+		c.Data["json"] = basic.ResInfo{InfoMsg: "修改成功", Status: 1, Data: nil}
+		c.ServeJSON()
 	}
-	c.Data["json"] = basic.ResInfo{InfoMsg: "添加失败", Status: 0, Data: nil}
+	c.Data["json"] = basic.ResInfo{InfoMsg: "修改失败", Status: 0, Data: nil}
 	c.ServeJSON()
 }

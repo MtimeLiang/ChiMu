@@ -17,3 +17,7 @@ func GetProductList() []models.Product {
 func AddProduct(p *models.Product) {
 	models.AddProduct(p)
 }
+
+func ModifyProduct(p *models.Product) {
+	models.ModifyProduct(p)
+}

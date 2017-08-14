@@ -17,6 +17,8 @@ func init() {
 	registerMyCenterControllers()
 	registerMyCouponControllers()
 	registerProductControllers()
+	registerPromotionControllers()
+	registerTeamControllers()
 }
 
 func registerAddressControllers() {
@@ -74,4 +76,15 @@ func registerProductControllers() {
 	beego.Router("/wine/product", &controllers.ProductController{}, "get:Product")
 	beego.Router("/wine/product_detail", &controllers.ProductController{}, "get:ProductDetail")
 	beego.Router("/wine/product_add", &controllers.ProductController{}, "*:AddProduct")
+	beego.Router("/wine/product_modify", &controllers.ProductController{}, "*:ModifyProduct")
+}
+
+func registerPromotionControllers() {
+	beego.Router("/wine/promotion", &controllers.PromotionController{}, "get:Promotion")
+	beego.Router("/wine/promotion_modify", &controllers.PromotionController{}, "*:ModifyPromotion")
+	beego.Router("/wine/promotion_delete", &controllers.PromotionController{}, "*:DeletePromotion")
+}
+
+func registerTeamControllers() {
+	beego.Router("/wine/team", &controllers.TeamController{}, "get:Team")
 }
